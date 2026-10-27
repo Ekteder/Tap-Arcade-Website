@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var currentFetch = typeof window.fetch === 'function' ? window.fetch.bind(window) : undefined;
+          if (currentFetch) {
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                return currentFetch;
+              },
+              set: function (fn) {
+                if (typeof fn === 'function') {
+                  currentFetch = fn;
+                }
+              },
+            });
+          }
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            var desc = Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+            if (desc && desc.configurable && !desc.set && !desc.writable) {
+              Object.defineProperty(Window.prototype, 'fetch', {
+                configurable: true,
+                enumerable: true,
+                get: function () {
+                  return currentFetch;
+                },
+                set: function (fn) {
+                  if (typeof fn === 'function') {
+                    currentFetch = fn;
+                  }
+                },
+              });
+            }
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <title>Tap Arcade — Fast Reflex Android Game by Ekteder</title>
+    <meta
+      name="description"
+      content="Test your reflexes in Tap Arcade (com.ekteder.taparcade) for Android. Tap shrinking targets, dodge octagonal hazards, and unlock 13 high-contrast themes. 100% ad-free."
+    />
+    <meta name="author" content="Ekteder" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="icon" type="image/png" href="/images/app-logo.png" />
+    <link rel="apple-touch-icon" href="/images/app-logo.png" />
+
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tap Arcade by Ekteder" />
+    <meta property="og:title" content="Tap Arcade — Fast Reflex Android Game by Ekteder" />
+    <meta
+      property="og:description"
+      content="Test your reflexes. Beat your best. Zero ads. Pure arcade. Play the live interactive 60 FPS browser demo, explore all 13 accessible themes, and view official Google Play compliance documentation."
+    />
+    <meta property="og:image" content="/images/feature-graphic.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:image:alt" content="Tap Arcade Official Feature Graphic — Tap Fast. Dodge Hazards. Unlock Themes." />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tap Arcade — Fast Reflex Android Game by Ekteder" />
+    <meta
+      name="twitter:description"
+      content="Tap circular targets before their lifetime rings shrink to zero. Evade octagonal warning hazards. Unlock 13 high-contrast themes. 100% ad-free on Android."
+    />
+    <meta name="twitter:image" content="/images/feature-graphic.png" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org MobileApplication Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Tap Arcade",
+        "operatingSystem": "Android 8.0+ (API 26–35)",
+        "applicationCategory": "GameApplication",
+        "applicationSubCategory": "ArcadeGame",
+        "identifier": "com.ekteder.taparcade",
+        "version": "1.0",
+        "inLanguage": "en",
+        "image": "/images/feature-graphic.png",
+        "screenshot": [
+          "/images/promo-phone-1.png",
+          "/images/promo-phone-2.png",
+          "/images/promo-phone-3.png",
+          "/images/promo-phone-4.png",
+          "/images/promo-phone-5.png"
+        ],
+        "description": "A minimalist 60 FPS reflex-tapping arcade game for Android phones and tablets. Tap circular targets before their lifetime rings expire, avoid octagonal warning hazards, and unlock 13 high-contrast cosmetic themes with zero ads.",
+        "author": {
+          "@type": "Organization",
+          "name": "Ekteder"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Ekteder"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-white text-[#22252A] antialiased selection:bg-[#4A90E2]/15 selection:text-[#22252A]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
