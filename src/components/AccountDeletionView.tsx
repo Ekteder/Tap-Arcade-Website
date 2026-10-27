@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ArrowLeft,
-  Copy,
-  Check,
   Smartphone,
   FileText,
   Shield,
@@ -18,24 +16,10 @@ export const AccountDeletionView: React.FC<AccountDeletionViewProps> = ({
   onBackToHome,
   onNavigatePrivacy,
 }) => {
-  const [copiedUrl, setCopiedUrl] = useState<boolean>(false);
-
-  const getDirectDeletionUrl = () => {
-    if (typeof window === 'undefined') return '?page=delete-account';
-    return `${window.location.origin}${window.location.pathname}?page=delete-account`;
-  };
-
-  const handleCopyPlayConsoleLink = () => {
-    const url = getDirectDeletionUrl();
-    navigator.clipboard.writeText(url).catch(() => {});
-    setCopiedUrl(true);
-    window.setTimeout(() => setCopiedUrl(false), 2000);
-  };
-
   return (
     <div className="min-h-screen bg-white py-12">
       <div className="max-w-[920px] mx-auto px-6">
-        {/* Top Navigation & Copy Direct Play Console Link */}
+        {/* Top Navigation */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-slate-200">
           <button
             type="button"
@@ -47,24 +31,6 @@ export const AccountDeletionView: React.FC<AccountDeletionViewProps> = ({
           </button>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={handleCopyPlayConsoleLink}
-              className="px-3.5 py-2 rounded-xl bg-[#F4F6F8] border border-slate-200 text-xs font-semibold text-[#22252A] hover:bg-slate-200/70 transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              {copiedUrl ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Copied Play Console Deletion URL!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-[#D9381E]" />
-                  <span>Copy Direct Play Console Link (?page=delete-account)</span>
-                </>
-              )}
-            </button>
-
             <button
               type="button"
               onClick={onNavigatePrivacy}

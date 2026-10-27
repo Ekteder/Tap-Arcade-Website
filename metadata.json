@@ -2,5 +2,5 @@
   "name": "Tap Arcade — Official Website & Play Store Compliance Hub",
   "description": "Official marketing website, interactive 60 FPS playable demo, 13-theme studio, media gallery, Privacy Policy, and Account Deletion hub for Tap Arcade (com.ekteder.taparcade) by Ekteder.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

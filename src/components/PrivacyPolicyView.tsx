@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Copy, Check, ExternalLink, Shield, Trash2 } from 'lucide-react';
+import React from 'react';
+import { ArrowLeft, ExternalLink, Shield, Trash2 } from 'lucide-react';
 import { SITE_CONFIG } from '../config/siteConfig';
 
 interface PrivacyPolicyViewProps {
@@ -11,20 +11,6 @@ export const PrivacyPolicyView: React.FC<PrivacyPolicyViewProps> = ({
   onBackToHome,
   onNavigateDeleteAccount,
 }) => {
-  const [copiedUrl, setCopiedUrl] = useState<boolean>(false);
-
-  const getDirectPrivacyUrl = () => {
-    if (typeof window === 'undefined') return '?page=privacy';
-    return `${window.location.origin}${window.location.pathname}?page=privacy`;
-  };
-
-  const handleCopyPlayConsoleLink = () => {
-    const url = getDirectPrivacyUrl();
-    navigator.clipboard.writeText(url).catch(() => {});
-    setCopiedUrl(true);
-    window.setTimeout(() => setCopiedUrl(false), 2000);
-  };
-
   return (
     <div className="min-h-screen bg-white py-12">
       <div className="max-w-[920px] mx-auto px-6">
@@ -40,24 +26,6 @@ export const PrivacyPolicyView: React.FC<PrivacyPolicyViewProps> = ({
           </button>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={handleCopyPlayConsoleLink}
-              className="px-3.5 py-2 rounded-xl bg-[#F4F6F8] border border-slate-200 text-xs font-semibold text-[#22252A] hover:bg-slate-200/70 transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              {copiedUrl ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Copied Play Console Link!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-[#4A90E2]" />
-                  <span>Copy Direct Play Console Link (?page=privacy)</span>
-                </>
-              )}
-            </button>
-
             <button
               type="button"
               onClick={onNavigateDeleteAccount}
@@ -308,7 +276,7 @@ export const PrivacyPolicyView: React.FC<PrivacyPolicyViewProps> = ({
                 onClick={onNavigateDeleteAccount}
                 className="px-4 py-2.5 rounded-xl bg-[#D9381E] text-white text-xs font-semibold hover:bg-red-700 transition-colors cursor-pointer"
               >
-                View Step-by-Step Account Deletion Guide (?page=delete-account) →
+                View Step-by-Step Account Deletion Guide →
               </button>
             </div>
           </section>

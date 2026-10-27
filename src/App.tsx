@@ -453,14 +453,14 @@ export default function App() {
               onClick={() => navigateToView('privacy')}
               className="hover:text-[#22252A] font-semibold text-[#4A90E2] cursor-pointer"
             >
-              Privacy Policy (?page=privacy)
+              Privacy Policy
             </button>
             <button
               type="button"
               onClick={() => navigateToView('delete-account')}
               className="hover:text-[#22252A] font-semibold text-[#D9381E] cursor-pointer"
             >
-              Delete Account (?page=delete-account)
+              Delete Account
             </button>
           </div>
         </div>

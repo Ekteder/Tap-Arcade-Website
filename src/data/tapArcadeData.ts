@@ -571,6 +571,6 @@ export const SUPPORT_FAQS: FaqItem[] = [
   {
     question: 'How do I permanently delete my Tap Arcade account and data?',
     answer:
-      'You can delete your account instantaneously inside the Android app via Profile → Account Actions → Delete Account. You can also review the full step-by-step deletion guide and data retention specifications on our Delete Account compliance page (?page=delete-account).',
+      'You can delete your account instantaneously inside the Android app via Profile → Account Actions → Delete Account. You can also review the full step-by-step deletion guide and data retention specifications on our Delete Account page.',
   },
 ];

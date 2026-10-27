@@ -250,7 +250,7 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
           {/* Right 5 Columns: Google Play Store Compliance Hub Cards */}
           <div className="lg:col-span-5 space-y-4">
             <p className="text-xs font-mono text-slate-500 mb-2">
-              Google Play Console Compliance Hub · Direct Endpoints
+              Google Play Console Compliance Hub
             </p>
             <h3 className="text-2xl font-bold text-[#22252A] mb-4">
               Official Legal &amp; Data Safety Hub
@@ -259,7 +259,7 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
             <div className="bg-[#F4F6F8] rounded-2xl border border-slate-200 p-6 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono text-slate-500">
-                  Endpoint: ?page=privacy
+                  Data Safety &amp; Legal
                 </span>
                 <FileText className="w-4 h-4 text-[#4A90E2]" />
               </div>
@@ -275,14 +275,14 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
                 onClick={() => onNavigateCompliance('privacy')}
                 className="w-full py-2.5 px-4 rounded-xl bg-[#22252A] text-white text-xs font-semibold hover:bg-slate-800 transition-colors cursor-pointer"
               >
-                Open Full Privacy Policy (?page=privacy)
+                Open Full Privacy Policy
               </button>
             </div>
 
             <div className="bg-[#F4F6F8] rounded-2xl border border-slate-200 p-6 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono text-slate-500">
-                  Endpoint: ?page=delete-account
+                  User Rights &amp; Compliance
                 </span>
                 <Trash2 className="w-4 h-4 text-[#D9381E]" />
               </div>
@@ -298,7 +298,7 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
                 onClick={() => onNavigateCompliance('delete-account')}
                 className="w-full py-2.5 px-4 rounded-xl bg-[#D9381E] text-white text-xs font-semibold hover:bg-red-700 transition-colors cursor-pointer"
               >
-                Open Account Deletion Guide (?page=delete-account)
+                Open Account Deletion Guide
               </button>
             </div>
           </div>

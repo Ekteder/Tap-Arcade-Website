@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Smartphone } from 'lucide-react';
 
 interface ResilientImageProps {
@@ -19,6 +19,12 @@ export const ResilientImage: React.FC<ResilientImageProps> = ({
   const [currentSrc, setCurrentSrc] = useState<string>(src);
   const [triedFallback, setTriedFallback] = useState<boolean>(false);
   const [hasFailed, setHasFailed] = useState<boolean>(false);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setTriedFallback(false);
+    setHasFailed(false);
+  }, [src, fallbackSrc]);
 
   const handleError = () => {
     if (!triedFallback && fallbackSrc && fallbackSrc !== currentSrc) {

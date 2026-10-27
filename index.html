@@ -3,44 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      (function () {
-        try {
-          var currentFetch = typeof window.fetch === 'function' ? window.fetch.bind(window) : undefined;
-          if (currentFetch) {
-            Object.defineProperty(window, 'fetch', {
-              configurable: true,
-              enumerable: true,
-              get: function () {
-                return currentFetch;
-              },
-              set: function (fn) {
-                if (typeof fn === 'function') {
-                  currentFetch = fn;
-                }
-              },
-            });
-          }
-          if (typeof Window !== 'undefined' && Window.prototype) {
-            var desc = Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
-            if (desc && desc.configurable && !desc.set && !desc.writable) {
-              Object.defineProperty(Window.prototype, 'fetch', {
-                configurable: true,
-                enumerable: true,
-                get: function () {
-                  return currentFetch;
-                },
-                set: function (fn) {
-                  if (typeof fn === 'function') {
-                    currentFetch = fn;
-                  }
-                },
-              });
-            }
-          }
-        } catch (_) {}
-      })();
-    </script>
     <title>Tap Arcade — Fast Reflex Android Game by Ekteder</title>
     <meta
       name="description"
