@@ -270,13 +270,16 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
                 Complete disclosure of Google Sign-In identity fields, Cloud Firestore diamond &amp; receipt storage,
                 local-only Jetpack DataStore separation, and zero third-party ad tracking.
               </p>
-              <button
-                type="button"
-                onClick={() => onNavigateCompliance('privacy')}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#22252A] text-white text-xs font-semibold hover:bg-slate-800 transition-colors cursor-pointer"
+              <a
+                href="/privacy"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateCompliance('privacy');
+                }}
+                className="block text-center w-full py-2.5 px-4 rounded-xl bg-[#22252A] text-white text-xs font-semibold hover:bg-slate-800 transition-colors cursor-pointer"
               >
                 Open Full Privacy Policy
-              </button>
+              </a>
             </div>
 
             <div className="bg-[#F4F6F8] rounded-2xl border border-slate-200 p-6 space-y-3">
@@ -293,13 +296,16 @@ export const FairPlayEconomySection: React.FC<FairPlayEconomySectionProps> = ({
                 Fulfilling Google Play&apos;s Data Safety requirement: includes the 6-step instant in-app deletion walkthrough
                 (Profile → Account Actions → Delete Account) and the data retention and anonymization schedule.
               </p>
-              <button
-                type="button"
-                onClick={() => onNavigateCompliance('delete-account')}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#D9381E] text-white text-xs font-semibold hover:bg-red-700 transition-colors cursor-pointer"
+              <a
+                href="/delete-account"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateCompliance('delete-account');
+                }}
+                className="block text-center w-full py-2.5 px-4 rounded-xl bg-[#D9381E] text-white text-xs font-semibold hover:bg-red-700 transition-colors cursor-pointer"
               >
                 Open Account Deletion Guide
-              </button>
+              </a>
             </div>
           </div>
         </div>

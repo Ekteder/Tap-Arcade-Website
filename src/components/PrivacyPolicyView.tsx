@@ -16,24 +16,30 @@ export const PrivacyPolicyView: React.FC<PrivacyPolicyViewProps> = ({
       <div className="max-w-[920px] mx-auto px-6">
         {/* Top Action Bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-slate-200">
-          <button
-            type="button"
-            onClick={onBackToHome}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onBackToHome();
+            }}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#22252A] hover:text-[#4A90E2] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to {SITE_CONFIG.appName} Overview</span>
-          </button>
+          </a>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={onNavigateDeleteAccount}
+            <a
+              href="/delete-account"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateDeleteAccount();
+              }}
               className="px-3.5 py-2 rounded-xl bg-[#22252A] text-white text-xs font-semibold hover:bg-slate-800 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Account Deletion Guide</span>
-            </button>
+            </a>
           </div>
         </div>
 

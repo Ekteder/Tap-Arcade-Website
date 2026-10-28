@@ -20,11 +20,14 @@ type ActiveView = 'landing' | 'privacy' | 'delete-account';
 
 function resolveViewFromLocation(): ActiveView {
   if (typeof window === 'undefined') return 'landing';
+  const pathname = window.location.pathname.toLowerCase().replace(/\/+$/, '');
   const params = new URLSearchParams(window.location.search);
   const pageParam = (params.get('page') || '').toLowerCase();
   const hash = (window.location.hash || '').toLowerCase();
 
   if (
+    pathname === '/privacy' ||
+    pathname === '/privacy-policy' ||
     pageParam === 'privacy' ||
     pageParam === 'privacy-policy' ||
     hash === '#privacy' ||
@@ -33,6 +36,9 @@ function resolveViewFromLocation(): ActiveView {
     return 'privacy';
   }
   if (
+    pathname === '/delete-account' ||
+    pathname === '/account-deletion' ||
+    pathname === '/delete' ||
     pageParam === 'delete-account' ||
     pageParam === 'account-deletion' ||
     pageParam === 'delete' ||
@@ -50,11 +56,33 @@ export default function App() {
   const [externalPlayTrigger, setExternalPlayTrigger] = useState<number>(0);
   const [copiedPkg, setCopiedPkg] = useState<boolean>(false);
 
-  // Synchronize URL query parameters & hash changes for Google Play Console compliance links
+  // Synchronize URL paths, parameters & hash changes
   useEffect(() => {
     const syncFromUrl = () => {
-      setActiveView(resolveViewFromLocation());
+      const view = resolveViewFromLocation();
+      setActiveView(view);
+
+      // Clean up legacy ?page= query parameter if present
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('page')) {
+          params.delete('page');
+          const remainingSearch = params.toString() ? `?${params.toString()}` : '';
+          const targetPath =
+            view === 'privacy'
+              ? '/privacy'
+              : view === 'delete-account'
+              ? '/delete-account'
+              : '/';
+          window.history.replaceState(
+            {},
+            '',
+            `${targetPath}${remainingSearch}${window.location.hash}`
+          );
+        }
+      }
     };
+    syncFromUrl();
     window.addEventListener('popstate', syncFromUrl);
     window.addEventListener('hashchange', syncFromUrl);
     return () => {
@@ -67,20 +95,18 @@ export default function App() {
     setActiveView(view);
     if (typeof window !== 'undefined') {
       const url = new URL(window.location.href);
+      url.searchParams.delete('page');
+      const search = url.searchParams.toString() ? `?${url.searchParams.toString()}` : '';
+
       if (view === 'privacy') {
-        url.searchParams.set('page', 'privacy');
-        url.hash = '';
-        window.history.pushState({}, '', url.toString());
+        window.history.pushState({}, '', `/privacy${search}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (view === 'delete-account') {
-        url.searchParams.set('page', 'delete-account');
-        url.hash = '';
-        window.history.pushState({}, '', url.toString());
+        window.history.pushState({}, '', `/delete-account${search}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        url.searchParams.delete('page');
-        url.hash = sectionId ? `#${sectionId}` : '';
-        window.history.pushState({}, '', url.toString());
+        const hash = sectionId ? `#${sectionId}` : '';
+        window.history.pushState({}, '', `/${search}${hash}`);
         if (sectionId) {
           window.setTimeout(() => {
             const el = document.getElementById(sectionId);
@@ -162,7 +188,7 @@ export default function App() {
               13 Themes
             </a>
             <a
-              href="?page=privacy"
+              href="/privacy"
               onClick={(e) => {
                 e.preventDefault();
                 navigateToView('privacy');
@@ -174,7 +200,7 @@ export default function App() {
               Privacy Policy
             </a>
             <a
-              href="?page=delete-account"
+              href="/delete-account"
               onClick={(e) => {
                 e.preventDefault();
                 navigateToView('delete-account');
@@ -420,48 +446,66 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-xs font-medium text-slate-600">
-            <button
-              type="button"
-              onClick={() => navigateToView('landing', 'gameplay')}
+            <a
+              href="#gameplay"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('landing', 'gameplay');
+              }}
               className="hover:text-[#22252A] cursor-pointer"
             >
               Gameplay
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateToView('landing', 'screenshots')}
+            </a>
+            <a
+              href="#screenshots"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('landing', 'screenshots');
+              }}
               className="hover:text-[#22252A] cursor-pointer"
             >
               Screenshots
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateToView('landing', 'themes')}
+            </a>
+            <a
+              href="#themes"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('landing', 'themes');
+              }}
               className="hover:text-[#22252A] cursor-pointer"
             >
               13 Themes
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateToView('landing', 'fair-play')}
+            </a>
+            <a
+              href="#fair-play"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('landing', 'fair-play');
+              }}
               className="hover:text-[#22252A] cursor-pointer"
             >
               Fair Play &amp; Economy
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateToView('privacy')}
+            </a>
+            <a
+              href="/privacy"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('privacy');
+              }}
               className="hover:text-[#22252A] font-semibold text-[#4A90E2] cursor-pointer"
             >
               Privacy Policy
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateToView('delete-account')}
+            </a>
+            <a
+              href="/delete-account"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToView('delete-account');
+              }}
               className="hover:text-[#22252A] font-semibold text-[#D9381E] cursor-pointer"
             >
               Delete Account
-            </button>
+            </a>
           </div>
         </div>
 
